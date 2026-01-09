@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Jayavel2005/TrashSense_API#readme",
   "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "multer": "^2.0.2",

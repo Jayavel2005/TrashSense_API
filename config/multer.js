@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
     const fileName = `${uuidv4()}${ext}`;
+    cb(null, fileName);
   },
 });
 
@@ -16,7 +17,7 @@ const fileFilter = (req, file, cb) => {
   if (!file.mimetype.startsWith("image/")) {
     const err = new Error("Unsupported file type! Kindly Check it.");
     err.statusCode = 415;
-    cb(err, false);
+    return cb(err, false);
   }
 
   cb(null, true);

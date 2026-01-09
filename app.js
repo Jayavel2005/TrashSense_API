@@ -1,9 +1,11 @@
 import express from "express";
+import transRouter from "./routes/routes.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Server is running" });
-});
+app.use(transRouter);
+
+app.use(errorMiddleware);
 
 export default app;
