@@ -1,4 +1,5 @@
-import { bufferConverter, buffertoTensor } from "../services/trash.service.js";
+import { bufferConverter, predict } from "../services/trash.service.js";
+import fs from "fs/promises";
 
 export const welcome = (req, res, next) => {
   res.status(200).json({
@@ -16,11 +17,13 @@ export const analyzeTrash = async (req, res, next) => {
     }
 
     const buffer = await bufferConverter(req.file.path);
-    const bufferToTensor = buffertoTensor();
+    const result = await predict(buffer);
+
+    await fs.unlink(req.file.path);
 
     res.status(200).json({
-      sucess: true,
-      message: "trash uploaded successfully.",
+      success: true,
+      result,
     });
   } catch (error) {
     next(error);
