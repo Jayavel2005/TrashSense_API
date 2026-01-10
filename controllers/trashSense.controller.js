@@ -19,13 +19,16 @@ export const analyzeTrash = async (req, res, next) => {
     const buffer = await bufferConverter(req.file.path);
     const result = await predict(buffer);
 
-    await fs.unlink(req.file.path);
-
     res.status(200).json({
       success: true,
+      trash: req.file.originalname,
       result,
     });
   } catch (error) {
     next(error);
+  } finally {
+    if (req.file?.path) {
+      await fs.unlink(req.file.path).catch(() => {});
+    }
   }
 };

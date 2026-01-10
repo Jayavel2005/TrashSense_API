@@ -14,9 +14,9 @@ const loadModel = async () => {
       model = await tf.loadLayersModel(
         "http://localhost:5000/model/model.json"
       );
-      console.log("✅ TrashSense AI model loaded successfully");
+      console.log("TrashSense AI model loaded successfully");
     } catch (err) {
-      console.error("❌ Model loading failed:", err.message);
+      console.error("Model loading failed:", err.message);
       throw err;
     }
   }
