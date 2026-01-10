@@ -19,6 +19,8 @@ export const analyzeTrash = async (req, res, next) => {
     const buffer = await bufferConverter(req.file.path);
     const result = await predict(buffer);
 
+    console.log(req.file);
+
     res.status(200).json({
       success: true,
       trash: req.file.originalname,
